@@ -1,0 +1,18 @@
+- name: create asg
+  hosts: localhost
+  tasks::
+    - name: create asg
+      ec2_asg:
+        name: webAsg
+        region: ap-south-1
+        load_balancers: webElb
+        launch_config_name: "{{ launch_config }}"
+        availability_zones: ['ap-south-1a', ap-south-1b']
+        vpc_zone_identifier: ['subnet-01ca481f9061e8442', 'subnet-07750bb272328afec']
+        min_size: 2
+        max_size: 2
+        desired_capacity: 2
+        replace_all_instances: yes
+        tags:
+          - type: test
+        wait_for_instances: yes

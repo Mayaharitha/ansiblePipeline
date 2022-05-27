@@ -1,0 +1,12 @@
+- name: launch configuration playbook
+  hosts: localhost
+  tasks:
+    - name: create launch configuration
+      ec2_lc:
+        name: "{{ launch_config }}"
+        image_id: ami-079b5e5b3971bd10d
+        instance_type: t2.micro
+        key_name: Mumbaikey
+        region: ap-south-1
+        security_group: ['web']
+        user_data_path: /etc/ansible/dirplay/scriptfile

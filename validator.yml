@@ -1,0 +1,16 @@
+- name: verify application
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: gathering facts
+      ec2_elb_facts:
+        name: webElb
+        region: ap-south-1
+      register: elb_facts
+    - debug:
+        msg: "{{ elb_facts.elbs.0.dsn_name }}"
+    - uri:
+        url: http://{{ elb_facts.elbs.0.dsn_name }}
+        return_connection: yes
+      register: this
+      failed_when: "Hello Testing is Successful" not in this.content

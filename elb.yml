@@ -1,0 +1,25 @@
+- name: create elb
+  hosts: localhost
+  tasks:
+    - name: create elb
+      ec2_elb_lb:
+        name: webElb
+        state: present
+        region: ap-south-1
+        security_group_ids = sg-02095687ae80ad838
+        zones: ['ap-south-1a', 'ap-south-1b']
+        cross_az_load_balancing: yes
+        listeners:
+          - protocol: http
+            load_balancer_port: 80
+            instance_port: 80
+        tags:
+          name: test
+        health_check:
+          ping_protocol: http
+          ping_port: 80
+          ping_path: "/index.html"
+          response_timeout: 5
+          interval: 120
+          unhealthy_threshold: 2
+          healthy_threshold: 2
