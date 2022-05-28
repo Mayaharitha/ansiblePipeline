@@ -3,6 +3,6 @@ node{
      git 'https://github.com/Mayaharitha/ansiblePipeline.git'
    }
    stage('Execute playbook'){
-    sh 'ansible-playbook -i hosts httpd.yml'
+    sh '/usr/bin/ansible-playbook -i hosts httpd.yml'
    }
 }
