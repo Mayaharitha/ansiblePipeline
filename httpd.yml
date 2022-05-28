@@ -1,0 +1,21 @@
+- name: create webserver
+  hosts: localhost
+  connection: local
+  remote_user: ec2-user
+  become: yes
+  gather_facts: False
+  tasks:
+    - name: install httpd
+      yum:
+        name: httpd
+        state: present
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
+        enable: True
+    - name: copy contents
+      copy:
+        src: /etc/ansible/scriptfile
+        dest: /var/www/html/index.html
+        mode: '777'
