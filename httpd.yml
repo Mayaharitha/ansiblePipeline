@@ -12,7 +12,7 @@
       service:
         name: httpd
         state: started
-        enable: True
+        enabled: yes
     - name: copy contents
       copy:
         src: scriptfile
