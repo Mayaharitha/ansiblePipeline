@@ -1,6 +1,5 @@
 - name: create webserver
-  hosts: localhost
-  connection: local
+  hosts: test
   remote_user: ec2-user
   become: yes
   gather_facts: False
